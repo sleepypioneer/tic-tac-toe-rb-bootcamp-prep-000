@@ -133,7 +133,7 @@ def play(board)
     turn(board)
   end
   if won?(board) == true
-    winner = winner(board)
+    winner = winner(board).to_a(string)
     puts "Congratulations #{winner}!"
   elsif draw?(board) == true
     puts "Cat's Game!"
