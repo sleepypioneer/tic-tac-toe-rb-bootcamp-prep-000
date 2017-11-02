@@ -127,3 +127,14 @@ def winner(board)
     return board[winning[0]]
   end
 end
+
+def play(board)
+  while over?(board) == false
+    turn(board)
+  end
+  if won? == true
+    puts "Congratulations player #{} won!"
+  elsif draw? == true
+    puts "The game is a draw"
+  end
+end
