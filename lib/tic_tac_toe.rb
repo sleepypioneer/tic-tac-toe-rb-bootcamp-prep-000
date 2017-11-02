@@ -50,7 +50,7 @@ def turn(board)
   input = gets.strip
   index = input_to_index(input)
   value = current_player(board)
-  valid = valid_move?(board, index, value)
+  valid = valid_move?(board, index)
   if valid == true
     move(board, index, value)
     display_board(board)
