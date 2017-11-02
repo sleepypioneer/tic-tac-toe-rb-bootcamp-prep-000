@@ -1,5 +1,13 @@
-def WIN_COMBINATIONS
-end
+WIN_COMBINATIONS = [
+  [0,1,2], # Top row
+  [3,4,5],  # Middle row
+  [6,7,8], # bottom row
+  [0,3,6],  # first column
+  [1,4,7], # second column
+  [2,5,8],  # third column
+  [0,4,8], # diagonal left to right
+  [2,4,6]  # diagonal right to left
+]
 
 def display_board
 end
@@ -11,7 +19,7 @@ def move
 end
 
 def position_taken?
-  
+
 end
 
 def valid_move?
@@ -20,17 +28,50 @@ end
 def turn
 end
 
-def won?
+def won?(board)
+  WIN_COMBINATIONS.each do | combination |
+      win_index_1 = combination[0]
+      win_index_2 = combination[1]
+      win_index_3 = combination[2]
+      puts "#{win_index_1}, #{win_index_2}, #{win_index_3}"
+      position_1 = board[win_index_1]
+      position_2 = board[win_index_2]
+      position_3 = board[win_index_3]
+      puts "#{position_1}, #{position_2}, #{position_3}"
+      if (position_1 =="X") && (position_2 == "X") && (position_3 == "X")
+        return [win_index_1, win_index_2, win_index_3]
+      elsif (position_1 =="O") && (position_2 == "O") && (position_3 == "O")
+        return [win_index_1, win_index_2, win_index_3]
+      end
+  end
+  return false
 end
 
-def full?
+def full?(board)
+  board.all? do |space|
+    space == "X" || space == "O"
+  end
 end
 
-def draw?
+def draw?(board)
+  if full?(board) == true && won?(board) == false
+    return true
+  else
+    return false
+  end
 end
 
-def over?
+def over?(board)
+  if (won?(board) != false) || (draw?(board) == true)
+    return true
+  end
 end
 
-def winner
+def winner(board)
+  if won?(board) == false
+    return nil
+  else
+    winning = won?(board)
+    return board[winning[0]]
+  end
 end
